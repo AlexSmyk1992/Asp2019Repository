@@ -1,0 +1,23 @@
+﻿@model BookingStore.Models.Book
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>New Book</h2>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Name, "Название книги")
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <br />
+    @Html.LabelFor(model => model.Author, "Автор")
+    <br />
+    @Html.EditorFor(model => model.Author)
+    <br />
+    @Html.LabelFor(model => model.Price, "Цена")
+    <br />
+    @Html.EditorFor(model => model.Price)
+    <br /><br />
+          <input type="submit" value="Add" />
+}

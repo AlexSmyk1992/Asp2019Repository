@@ -1,0 +1,26 @@
+﻿@using BookingStore.Models
+@model BookingStore.Models.Purchase
+
+@{
+    ViewBag.Title = "Buy";
+}
+
+<div>
+    <h3>Форма оформления покупки</h3>
+    @using (Html.BeginForm("Buy", "Home", FormMethod.Post))
+    {
+        @Html.HiddenFor(m=>m.BookId)
+    <table>
+        <tr>
+            <td>@Html.Label("Person", "Enter your name")</td>
+            <td>@Html.EditorFor(m=>m.Person)</td>
+        </tr>
+        <tr>
+            <td><p>Enter adress</p></td>
+            <td>@Html.EditorFor(m=>m.Address)</td>
+        </tr>
+        <tr><td><input type="submit" value="Send" /></td></tr>
+    </table>
+    }
+</div>
+
