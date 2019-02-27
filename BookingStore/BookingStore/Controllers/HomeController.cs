@@ -19,6 +19,21 @@ namespace BookingStore.Controllers
         }
 
         [HttpGet]
+        public ActionResult CreateBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateBook(Book book)
+        {
+            db.Books.Add(book);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -57,6 +72,29 @@ namespace BookingStore.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+         [HttpGet]
+        public ActionResult EditBookTemplate(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Book book = db.Books.Find(id);
+            if (book != null)
+            {
+                return View(book);
+            }
+            return HttpNotFound();
+        }
+        [HttpPost]
+        public ActionResult EditBookTemplate(Book book)
+        {
+            db.Entry(book).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
         [HttpGet]
         public ActionResult EditBook(int? id)
