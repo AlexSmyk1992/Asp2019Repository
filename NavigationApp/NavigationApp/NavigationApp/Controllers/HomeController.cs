@@ -17,7 +17,7 @@ namespace NavigationApp.Controllers
             return View(players.ToList());
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Create()
         {
             SelectList teams = new SelectList(db.Teams, "Id", "Name");
@@ -31,6 +31,47 @@ namespace NavigationApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Player player = db.Players.Find(id);
+            if (player !=null)
+            {
+                SelectList teams = new SelectList(db.Teams, "Id", "Name", player.TeamId);
+                ViewBag.Teams = teams;
+                return View(player);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Player player)
+        {
+            db.Entry(player).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Player player = db.Players.Find(id);
+            if (player != null)
+            {
+                db.Players.Remove(player);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
