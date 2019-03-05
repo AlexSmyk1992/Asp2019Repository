@@ -6,11 +6,12 @@ using System.Web;
 
 namespace ManyToMany.Models
 {
-    public class StudentContext
+    public class StudentContext: DbContext
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
     }
+
     public class CourseDbInitializer : DropCreateDatabaseAlways<StudentContext>
     {
         protected override void Seed(StudentContext context)
