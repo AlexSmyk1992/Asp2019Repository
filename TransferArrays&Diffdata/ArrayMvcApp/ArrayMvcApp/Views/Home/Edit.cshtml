@@ -1,0 +1,18 @@
+﻿@model List<ArrayMvcApp.Models.Book>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <h4>Книга № @(i + 1)</h4>
+
+        @:Name: @Html.EditorFor(m => m[i].Name)
+        @:Name: @Html.EditorFor(m => m[i].Author)
+        @:Name: @Html.EditorFor(m => m[i].Price)
+    }
+    <input type="submit" />
+}

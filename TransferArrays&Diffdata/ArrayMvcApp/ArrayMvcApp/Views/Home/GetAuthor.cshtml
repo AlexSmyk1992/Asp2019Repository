@@ -1,0 +1,46 @@
+﻿@model ArrayMvcApp.Models.Author
+
+@{
+    ViewBag.Title = "GetAuthor";
+}
+
+<h2>GetAuthor</h2>
+@using (Html.BeginForm())
+{
+    <div class="authorBlock">
+        <label>Имя автора</label>
+        <input type="text" name="name" />
+    </div>
+    <div id="booksBlock">
+        <div class="bookItem">
+            <h4>Книга № 1</h4>
+            <div>
+                <label>Название</label>
+                <div>
+                    <input type="text" name="Books[0].name" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <p><a class="addLink">Добавить новый элемент</a></p>
+    <p><input type="submit" value="Добавить" /></p>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            var i = 0;
+            $('.addLink').click(function () {
+                i++;
+                var html2Add = "<div class='bookItem'>" +
+                    "<h4>Книга № " + (i + 1) + "</h4>" +
+                    "<div><label>Название</label><div>" +
+                    "<input type='text' name='Books[" + i + "].name' />" +
+                    "</div></div></div>";
+                $('#booksBlock').append(html2Add);
+            })
+        })
+    </script>
+}
+
